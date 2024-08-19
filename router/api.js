@@ -135,7 +135,8 @@ router.get("/downloader/tiktok", async (req, res) => {
   if (!url) return res.status(400).json(messages.url);
 
   try {
-    const data = await danz.downloader.tiktok(url);
+  const { tiktokdl } = require("tiktokdl")
+    const data = await tiktokdl(url);
     if (!data) return res.status(404).json(messages.notRes);
     res.json({ status: true, developer: dev, result: data });
   } catch (e) {
