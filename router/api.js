@@ -83,7 +83,19 @@ router.get("/ai/virtualgirl", async (req, res) => {
     res.status(500).json(messages.error);
   }
 });
+router.get("/ai/gpt4", async (req, res) => {
+const { query } = req.query;
+if (!query) return res.status(400).json(messages.query);
 
+try {
+const { gpt4 } = require("./gpt4");
+const data = await gpt4(query);
+if (!data) return res.status(404).json(messages.notRes);
+res.json({ status: true, developer: dev, result: data });
+} catch (e) {
+res.status(500).json(messages.error);
+}
+});
 router.get("/ai/dystopia", async (req, res) => {
   const { query } = req.query;
   if (!query) return res.status(400).json(messages.query);
