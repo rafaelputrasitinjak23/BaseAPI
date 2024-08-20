@@ -46,17 +46,65 @@ const swaggerDocument = {
       description:
         "API endpoints for artificial intelligence content from various platforms.",
     },
-    // {
-    //   name: "Downloader",
-    //   description:
-    //     "API endpoints for downloading content from various platforms.",
-    // },
-    // {
-    //   name: "Tools",
-    //   description: "API endpoints for content tools from multiple platforms.",
+     {
+       name: "Downloader",
+       description:
+         "API endpoints for downloading content from various platforms.",
+     },
+     {
+       name: "Tools",
+       description: "API endpoints for content tools from multiple platforms.",
     // },
   ],
   paths: {
+  "/api/ai/gpt4": {
+  get: {
+  tags: ["AI"]
+  summary: "Chat with GPT 4",
+  parameters: [
+  {
+  in: "query",
+  name: "query",
+            schema: {
+              type: "string",
+            },
+            required: true,
+            description: inQuery,
+          },
+        ],
+        responses: {
+          200: {
+            description: "Result successfully returned",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    status: {
+                      type: "boolean",
+                      example: true,
+                    },
+                    developer: {
+                      type: "string",
+                      example: config.options.developer,
+                    },
+                    result: {
+                      type: "object",
+                      properties: {
+                        message: {
+                          type: "string",
+                          example: "Hello! How can I help you today?",
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
     "/api/ai/chatgpt": {
       get: {
         tags: ["AI"],
